@@ -45,6 +45,112 @@ footer{padding:30px 0;color:var(--muted);font-size:13px;border-top:1px solid var
  .grid{grid-template-columns:1fr}
  section{padding:46px 0}
 }
+ 
+/* Profile photo and automatic image slider */
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.profile-card {
+  width: 125px;
+  margin-left: auto;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.profile-photo {
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+  border: 2px solid #50b8ff;
+}
+
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  color: #ff3030;
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: nameScroll 7s linear infinite;
+}
+
+@keyframes nameScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+.photo-gallery {
+  width: 100%;
+  max-width: 310px;
+  margin-left: auto;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #22334a;
+  background: #101a2b;
+  padding: 8px;
+}
+
+.photo-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.photo-slider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: slideShow 12s infinite;
+}
+
+.photo-slider img:nth-child(1) { animation-delay: 0s; }
+.photo-slider img:nth-child(2) { animation-delay: 4s; }
+.photo-slider img:nth-child(3) { animation-delay: 8s; }
+
+@keyframes slideShow {
+  0% { opacity: 0; transform: translateX(30px); }
+  5% { opacity: 1; transform: translateX(0); }
+  30% { opacity: 1; transform: translateX(0); }
+  35% { opacity: 0; transform: translateX(-30px); }
+  100% { opacity: 0; }
+}
+
+.gallery-caption {
+  color: #9aabc2;
+  font-size: 11px;
+  text-align: center;
+  padding-top: 6px;
+}
+
+@media (max-width: 650px) {
+  .hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card {
+    margin: 0 0 18px auto;
+  }
+
+  .photo-gallery {
+    max-width: 270px;
+  }
+}
 </style>
 </head>
 <body>
@@ -60,20 +166,83 @@ footer{padding:30px 0;color:var(--muted);font-size:13px;border-top:1px solid var
 </header>
 
 <main>
-<section class="hero" id="home" style="border:0">
- <div class="wrap">
-  <div class="eyebrow">Cybersecurity • Machine Learning • Research</div>
-  <h1>Hi, I'm <span class="accent">Imtiaz Ahmed.</span></h1>
-  <h3>Aspiring Cybersecurity Researcher</h3>
-  <p>I am building my skills in cybersecurity through hands-on projects, independent research and continuous learning. My interests include phishing detection, machine learning and digital security.</p>
-  <div class="actions">
-   <a class="btn primary" href="#projects">Explore My Projects ↗</a>
-   <a class="btn" href="https://github.com/imtiaz7089">GitHub Profile</a>
-   <a class="btn" href="#contact">Contact Me</a>
-  </div>
- </div>
-</section>
 
+<section class="hero" id="home" style="border:0">
+  <div class="wrap">
+    <div class="hero-layout">
+
+      <!-- Left: Main introduction -->
+      <div>
+        <div class="eyebrow">
+          Cybersecurity • Machine Learning • Research
+        </div>
+
+        <h1>Hi, I'm <span class="accent">Imtiaz Ahmed.</span></h1>
+
+        <h3>Aspiring Cybersecurity Researcher</h3>
+
+        <p>
+          I am building my skills in cybersecurity through
+          hands-on projects, independent research and continuous
+          learning. My interests include phishing detection,
+          machine learning and digital security.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="#projects">
+            Explore My Projects ↗
+          </a>
+          <a class="btn" href="https://github.com/imtiaz7089">
+            GitHub Profile
+          </a>
+          <a class="btn" href="#contact">Contact Me</a>
+        </div>
+      </div>
+
+      <!-- Right: Profile photo and moving name -->
+      <div>
+        <div class="profile-card">
+          <img
+            class="profile-photo"
+            src="WhatsApp%20Image%202026-10-09%20at%207.10.52%20PM.jpeg"
+            alt="Imtiaz Ahmed professional portrait"
+          >
+
+          <div class="marquee">
+            <span>IMTIAZ AHMED • IMTIAZ AHMED • </span>
+          </div>
+        </div>
+
+        <!-- Three-photo automatic slider -->
+        <div class="photo-gallery">
+          <div class="photo-slider">
+
+            <img
+              src="WhatsApp%20Image%202026-10-09%20at%207.10.53%20PM%20(2).jpeg"
+              alt="Imtiaz Ahmed photo one"
+            >
+
+            <img
+              src="WhatsApp%20Image%202026-10-09%20at%207.10.53%20PM%20(1).jpeg"
+              alt="Imtiaz Ahmed photo two"
+            >
+
+            <img
+              src="WhatsApp%20Image%202026-10-09%20at%207.10.53%20PM.jpeg"
+              alt="Imtiaz Ahmed photo three"
+            >
+
+          </div>
+
+          <div class="gallery-caption">
+            My Journey • Cybersecurity • Learning
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 <section id="about"><div class="wrap">
  <div class="eyebrow">01 / About</div><h2>About Me</h2>
  <p class="intro">I am a student from Bangladesh developing my knowledge of cybersecurity through online learning, practical experimentation and personal projects. I aim to study cybersecurity at the undergraduate level and contribute to a safer digital world.</p>
