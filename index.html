@@ -292,48 +292,56 @@ footer{padding:30px 0;color:var(--muted);font-size:13px;border-top:1px solid var
   }
 }
 
-
-/* Prominent Cybersecurity Background */
+/* Animated Cyber Hacker Background */
 body {
   position: relative;
-  isolation: isolate;
-  background:
-    radial-gradient(ellipse at 15% 20%, #087bff45, transparent 38%),
-    radial-gradient(ellipse at 85% 45%, #00d5ff25, transparent 35%),
-    radial-gradient(ellipse at 50% 95%, #164bff35, transparent 42%),
-    #080d18;
-  background-attachment: fixed;
+  background: #050914;
 }
 
-z-index: 0; {
-  content: "";
+#cyber-background {
   position: fixed;
-  inset: -20%;
-  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
   pointer-events: none;
-  background:
-    radial-gradient(ellipse at 25% 30%, #168bff55, transparent 28%),
-    radial-gradient(ellipse at 75% 65%, #00c8ff35, transparent 30%);
-  filter: blur(35px);
-  animation: cyberLightWaves 10s ease-in-out infinite alternate;
+  opacity: 1;
 }
 
-@keyframes cyberLightWaves {
-  0% {
-    transform: translate(-3%, -2%) scale(0.95);
-  }
-  50% {
-    transform: translate(2%, 2%) scale(1.05);
-  }
-  100% {
-    transform: translate(4%, -1%) scale(1.1);
-  }
+body > header,
+body > main,
+body > footer {
+  position: relative;
+  z-index: 1;
+}
+
+#projects {
+  background: rgba(7, 15, 31, 0.78) !important;
+}
+
+#research {
+  background: rgba(7, 15, 31, 0.72) !important;
+}
+
+#about,
+#skills,
+#education,
+#certificates,
+#blog,
+#contact {
+  background: rgba(5, 9, 20, 0.40);
+}
+
+.card {
+  background: rgba(16, 26, 43, 0.90);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body::before {
-    animation: none;
+  #cyber-background {
+    opacity: 0.65;
   }
+}
+
 }
 
 /* Keep the website content above the animated background */
@@ -346,7 +354,9 @@ body > footer {
 
 </style>
 </head>
-<body>
+<body> 
+<canvas id="cyber-background"></canvas>
+
 <header>
  <nav class="wrap">
   <a class="logo" href="#home"> <a class="logo" href="#home">IMTIAZ AHMED</a></a>
@@ -630,6 +640,109 @@ body > footer {
  <p>© <span id="year"></span> Imtiaz Ahmed. Built with curiosity and a commitment to learning.</p>
  <p class="small">This portfolio presents personal learning and project work. Project results should be interpreted within their stated experimental scope.</p>
 </div></footer>
-<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+(() => {
+  const canvas = document.getElementById("cyber-background");
+  const ctx = canvas.getContext("2d");
+
+  let w, h, columns, drops, nodes = [];
+  const chars = "01アイウエオカキクケコサシスセソ<>[]{}/\\#$%";
+  const fontSize = 14;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    columns = Math.ceil(w / fontSize);
+    drops = Array.from({ length: columns }, () =>
+      Math.random() * (h / fontSize)
+    );
+
+    nodes = Array.from({ length: Math.min(65, Math.floor(w * h / 14000)) }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.45,
+      vy: (Math.random() - 0.5) * 0.45
+    }));
+  }
+
+  function draw() {
+    ctx.fillStyle = "rgba(5, 9, 20, 0.14)";
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      const x = i * fontSize;
+      const y = drops[i] * fontSize;
+
+      ctx.fillStyle = Math.random() > 0.94
+        ? "rgba(80, 220, 255, 0.95)"
+        : "rgba(30, 190, 125, 0.72)";
+
+      ctx.fillText(char, x, y);
+
+      if (y > h && Math.random() > 0.975) {
+        drops[i] = 0;
+      } else {
+        drops[i] += 0.65;
+      }
+    }
+
+    for (const n of nodes) {
+      n.x += n.vx;
+      n.y += n.vy;
+
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    }
+
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 145) {
+          ctx.strokeStyle = `rgba(30, 145, 255, ${0.32 * (1 - dist / 145)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    for (const n of nodes) {
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = "#00cfff";
+      ctx.fillStyle = "#56dfff";
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+  draw();
+})();
+</script>
+
 </body>
 </html>
