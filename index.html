@@ -305,7 +305,7 @@ body {
   background-attachment: fixed;
 }
 
-body::before {
+z-index: 0; {
   content: "";
   position: fixed;
   inset: -20%;
@@ -336,6 +336,13 @@ body::before {
   }
 }
 
+/* Keep the website content above the animated background */
+body > header,
+body > main,
+body > footer {
+  position: relative;
+  z-index: 1;
+}
 
 </style>
 </head>
