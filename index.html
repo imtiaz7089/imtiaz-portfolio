@@ -30,7 +30,18 @@ a:hover{opacity:.8}
 .wrap{width:min(1080px,90%);margin:auto}
 header{position:sticky;top:0;background:#080d18ed;border-bottom:1px solid var(--line);z-index:10;backdrop-filter:blur(12px)}
 nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.logo{font-size:19px;font-weight:800;color:white}
+.logo {
+  font-size: 21px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.logo:hover {
+  color: var(--blue);
+  transition: color 0.3s ease;
+}
 .logo span,.accent{color:var(--blue)}
 .links{display:flex;gap:18px;flex-wrap:wrap;font-size:13px}
 .links a{color:var(--muted)}
