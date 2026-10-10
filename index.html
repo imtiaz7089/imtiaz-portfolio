@@ -14,6 +14,19 @@ html{scroll-behavior:smooth;scroll-padding-top:85px}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.7}
 a{color:var(--blue);text-decoration:none}
 a:hover{opacity:.8}
+ a, .btn, .card {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px #50b8ff30;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #50b8ff80;
+}
 .wrap{width:min(1080px,90%);margin:auto}
 header{position:sticky;top:0;background:#080d18ed;border-bottom:1px solid var(--line);z-index:10;backdrop-filter:blur(12px)}
 nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -269,7 +282,6 @@ footer{padding:30px 0;color:var(--muted);font-size:13px;border-top:1px solid var
   </article>
  </div>
 </div></section>
-```html
 <section id="research"><div class="wrap">
  <div class="eyebrow">03 / Research & Writing</div>
  <h2>Research</h2>
@@ -303,7 +315,6 @@ footer{padding:30px 0;color:var(--muted);font-size:13px;border-top:1px solid var
   </article>
  </div>
 </div></section>
-```
 
 <section id="skills"><div class="wrap">
  <div class="eyebrow">04 / Technical Profile</div><h2>Skills</h2>
