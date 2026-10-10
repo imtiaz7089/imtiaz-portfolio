@@ -292,6 +292,45 @@ footer{padding:30px 0;color:var(--muted);font-size:13px;border-top:1px solid var
   }
 }
 
+/* Animated Cyber Blue Background Glow */
+body {
+  background:
+    radial-gradient(ellipse at 10% 20%, #123b6330, transparent 35%),
+    radial-gradient(ellipse at 90% 45%, #07598524, transparent 32%),
+    radial-gradient(ellipse at 45% 90%, #1d4ed81a, transparent 38%),
+    #080d18;
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 25% 30%, #50b8ff15 0, transparent 22%),
+    radial-gradient(circle at 75% 65%, #2563eb18 0, transparent 25%);
+  animation: cyberGlow 12s ease-in-out infinite alternate;
+}
+
+@keyframes cyberGlow {
+  0% {
+    transform: translate(-2%, -1%) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(2%, 1%) scale(1.08);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+}
+
 </style>
 </head>
 <body>
