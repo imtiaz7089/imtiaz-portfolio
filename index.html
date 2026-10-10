@@ -175,6 +175,50 @@ footer{padding:30px 0;color:var(--muted);font-size:13px;border-top:1px solid var
     max-width: 270px;
   }
 }
+ 
+/* Featured Projects - refined hover effects */
+#projects .card {
+  border: 1px solid #294565;
+  border-radius: 14px;
+  background: #101a2b;
+  transition: transform 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+#projects .card:hover {
+  transform: translateY(-5px);
+  border-color: #50b8ff;
+  box-shadow: 0 8px 28px #50b8ff20;
+}
+
+#projects .card a {
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+#projects .card a:hover {
+  color: #9bd8ff;
+  opacity: 1;
+}
+
+#projects .card svg {
+  filter: drop-shadow(0 0 7px #50b8ff35);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+#projects .card:hover svg {
+  filter: drop-shadow(0 0 10px #50b8ff75);
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects .card,
+  #projects .card a,
+  #projects .card svg {
+    transition: none;
+  }
+}
+
 </style>
 </head>
 <body>
