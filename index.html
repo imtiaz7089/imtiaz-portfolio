@@ -302,17 +302,20 @@ body {
   background-attachment: fixed;
 }
 
+
 body::before {
   content: "";
   position: fixed;
-  inset: -50%;
+  inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   background:
-    radial-gradient(circle at 25% 30%, #50b8ff15 0, transparent 22%),
-    radial-gradient(circle at 75% 65%, #2563eb18 0, transparent 25%);
-  animation: cyberGlow 12s ease-in-out infinite alternate;
+    radial-gradient(ellipse at 15% 25%, #50b8ff25, transparent 35%),
+    radial-gradient(ellipse at 85% 55%, #2563eb25, transparent 35%),
+    radial-gradient(ellipse at 50% 90%, #50b8ff18, transparent 40%);
+  animation: cyberGlow 8s ease-in-out infinite alternate;
 }
+
 
 @keyframes cyberGlow {
   0% {
